@@ -109,18 +109,18 @@ class DoctorProfile extends Component {
       })
       .then((response) => {
         console.log(response, "doc profileee");
-        let start = response.data.data.start_hour
-        let end = response.data.data.end_hour
-        if (start == null) {
-          start = ""
-        } else {
-          start = response.data.data.start_hour.slice(0, -3)
-        }
-        if (end == null) {
-          end = ""
-        } else {
-          end = response.data.data.start_hour.slice(0, -3)
-        }
+        let start = response.data.data.start_hour ? response.data.data.start_hour.slice(0, -3) : ""
+        let end = response.data.data.end_hour ? response.data.data.end_hour.slice(0, -3) : ""
+        // if (start == null) {
+        //   start = ""
+        // } else {
+        //   start = response.data.data.start_hour.slice(0, -3)
+        // }
+        // if (end == null) {
+        //   end = ""
+        // } else {
+        //   end = response.data.data.start_hour.slice(0, -3)
+        // }
 
         this.setState({ doctor: [response.data.data], 
           currentStatus: response.data.data.status, 
