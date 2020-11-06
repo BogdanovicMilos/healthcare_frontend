@@ -60,6 +60,8 @@ class ClientDashboard extends Component {
         this.connect(response.data.data.id);
         this.props.curentDoc([response.data.data.user]);
         this.setState({ client: response.data.data });
+      })
+      .then(() => {
         this.paginatedExams();
       })
   }
@@ -262,9 +264,13 @@ class ClientDashboard extends Component {
         headers: { Authorization: access_token },
       })
       .then((response) => {
-        this.setState({
-          exams: [...this.state.exams.concat(response.data.data.queue)],
-        });
+        if (response.data.data.queue.length !== 0) {
+          this.setState({
+            exams: [...this.state.exams.concat(response.data.data.queue)],
+          });
+        } 
+      })
+      .then(() => {
         this.handleAll();
         this.paginate(this.state.page);
         this.getUnreadMessages(this.state.client.id);
