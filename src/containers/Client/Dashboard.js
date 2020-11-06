@@ -59,7 +59,7 @@ class ClientDashboard extends Component {
         console.log(response, 'milos');
         this.connect(response.data.data.id);
         this.props.curentDoc([response.data.data.user]);
-        this.setState({ client: response.data.data });
+        return this.setState({ client: response.data.data });
       })
       .then(() => {
         this.paginatedExams();
