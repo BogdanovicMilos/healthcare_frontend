@@ -259,6 +259,7 @@ class ClientDashboard extends Component {
 
   WaitingRoomList = async () => {
     const access_token = "Bearer ".concat(this.state.token);
+    console.log('alo');
     axios
       .get(`http://healthcarebackend.xyz/api/queue/${this.state.client.id}/`, {
         headers: { Authorization: access_token },
