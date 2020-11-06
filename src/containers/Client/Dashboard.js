@@ -262,26 +262,27 @@ class ClientDashboard extends Component {
     console.log('alo');
     console.log(this.state.client.id, 'ajdi');
     const request = await axios
-            .get(`http://healthcarebackend.xyz/api/queue/${this.state.client.id}/`, {
-              headers: { Authorization: access_token },
-            })
-            .then((response) => {
-              console.log(response, 'res');
-              this.setState({
-                exams: [...this.state.exams.concat(response.data.data.queue)],
-              });  
-            })
-            .then(() => {
-              console.log('yes');
-              this.handleAll();
-              this.paginate(this.state.page);
-              this.getUnreadMessages(this.state.client.id);
-            })
-            .catch((err) => {
-              console.log('mo');
-              console.log(err.response);
-            });
-      console.log(request, 'dadada');
+      .get(`http://healthcarebackend.xyz/api/queue/${this.state.client.id}/`, {
+        headers: { Authorization: access_token },
+      })
+      .then((response) => {
+        console.log(response, 'res');
+        this.setState({
+          exams: [...this.state.exams.concat(response.data.data.queue)],
+        });  
+      })
+      .then(() => {
+        console.log('yes');
+        this.handleAll();
+        this.paginate(this.state.page);
+        this.getUnreadMessages(this.state.client.id);
+      })
+      .catch((err) => {
+        console.log('mo');
+        console.log(err.response);
+      });
+      const jsonData = await request.json();
+      console.log(jsonData, 'dadada');
   };
 
   paginate = (page) => {
