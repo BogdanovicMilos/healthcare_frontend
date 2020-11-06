@@ -56,6 +56,7 @@ class ClientDashboard extends Component {
         headers: { Authorization: access_token },
       })
       .then((response) => {
+        console.log(response, 'milos');
         this.connect(response.data.data.id);
         this.props.curentDoc([response.data.data.user]);
         this.setState({ client: response.data.data });
@@ -228,12 +229,13 @@ class ClientDashboard extends Component {
 
   paginatedExams = async () => {
     const access_token = "Bearer ".concat(this.state.token);
-
+    console.log('milosaaaaa');
     axios
       .get(`http://healthcarebackend.xyz/api/exams/client/`, {
         headers: { Authorization: access_token },
       })
       .then((res) => {
+        console.log(res, 'milossasSASASAD');
         if (
           res.data.data.mail.length !== 0 ||
           res.data.data.video.length !== 0
