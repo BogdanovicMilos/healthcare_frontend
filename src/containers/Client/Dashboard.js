@@ -262,11 +262,11 @@ class ClientDashboard extends Component {
     console.log('alo');
     console.log(this.state.client.id, 'ajdi');
     axios
-      .get(`http://healthcarebackend.xyz/api/queue/${this.state.client.id}/`, {
+      .get(`http://healthcarebackend.xyz/api/queue/client/${this.state.client.id}/`, {
         headers: { Authorization: access_token },
       })
       .then((response) => {
-        console.log(response, 'alooooo');
+        console.log(response, 'res');
         if (response.data.status_code === 404) {
           this.setState({
             exams: [...this.state.exams.concat(response.data.data.queue)],
