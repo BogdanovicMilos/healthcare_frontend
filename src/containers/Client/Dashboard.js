@@ -257,32 +257,29 @@ class ClientDashboard extends Component {
       });
   };
 
-  WaitingRoomList = () => {
+  WaitingRoomList = async () => {
     const access_token = "Bearer ".concat(this.state.token);
-    console.log('alo');
-    console.log(this.state.client.id, 'ajdi');
-    const data = axios.get(`http://healthcarebackend.xyz/api/queue/${this.state.client.id}/`, {
+    axios
+      .get(`http://healthcarebackend.xyz/api/queue/${this.state.client.id}/`, {
         headers: { Authorization: access_token },
-        })
-        .then((response) => {
-          console.log(response, 'res');
-          this.setState({
-            exams: [...this.state.exams.concat(response.data.data.queue)],
-          });  
-        })
-        .then(() => {
-          console.log('yes');
+      })
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          exams: [...this.state.exams.concat(response.data.data.queue)],
+        });
+        this.handleAll();
+        this.paginate(this.state.page);
+        this.getUnreadMessages(this.state.client.id);
+      })
+      .catch((err) => {
+        if(err.response.status === 404){
           this.handleAll();
           this.paginate(this.state.page);
           this.getUnreadMessages(this.state.client.id);
-        })
-        .catch((err) => {
-          console.log('mo');
-          console.log(err.response);
-        });
-        console.log(data);
-      console.log(data);
-    console.log(data);  
+        }
+        console.log(err.response);
+      });
   };
 
   paginate = (page) => {
