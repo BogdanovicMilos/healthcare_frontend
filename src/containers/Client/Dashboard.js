@@ -260,13 +260,14 @@ class ClientDashboard extends Component {
   WaitingRoomList = async () => {
     const access_token = "Bearer ".concat(this.state.token);
     console.log('alo');
+    console.log(this.state.client.id, 'ajdi');
     axios
       .get(`http://healthcarebackend.xyz/api/queue/${this.state.client.id}/`, {
         headers: { Authorization: access_token },
       })
       .then((response) => {
         console.log(response, 'alooooo');
-        if (response.data.data.queue.length !== 0) {
+        if (response.data.status_code === 404) {
           this.setState({
             exams: [...this.state.exams.concat(response.data.data.queue)],
           });
@@ -279,7 +280,7 @@ class ClientDashboard extends Component {
         this.getUnreadMessages(this.state.client.id);
       })
       .catch((err) => {
-        console.log('milosina');
+        console.log('mo');
         console.log(err.response);
       });
   };
