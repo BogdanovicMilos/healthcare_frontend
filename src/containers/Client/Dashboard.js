@@ -264,6 +264,7 @@ class ClientDashboard extends Component {
         headers: { Authorization: access_token },
       })
       .then((response) => {
+        console.log(response, 'alooooo');
         if (response.data.data.queue.length !== 0) {
           this.setState({
             exams: [...this.state.exams.concat(response.data.data.queue)],
