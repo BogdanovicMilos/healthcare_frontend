@@ -273,11 +273,13 @@ class ClientDashboard extends Component {
         } 
       })
       .then(() => {
+        console.log('yes');
         this.handleAll();
         this.paginate(this.state.page);
         this.getUnreadMessages(this.state.client.id);
       })
       .catch((err) => {
+        console.log('milosina');
         console.log(err.response);
       });
   };
